@@ -1,69 +1,49 @@
-# React + TypeScript + Vite
+# WBS Travel Journal SPA
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Starter code for authentication/authorization module at WBS Coding School
 
-Currently, two official plugins are available:
+## Setup
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Fork repo
+- Clone into your computer
+- `cd` into working directory
+- `npm i` to install dependencies
+- create a `.env.development.local`:
+  - `VITE_APP_TRAVEL_JOURNAL_API_URL` set to `http://localhost:8000` assuming your backend API is running on port 8000
+- The server defaults to port `5173`, although you can override this in the script sections in `package.json`
 
-## Expanding the ESLint configuration
+## Commands
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- `npm run dev`: Starts development server, pulling environment variables from `.env.development.local` file
+- `npm run build`: Build app with enviroment set to `.env.production.local`
+- `npm run preview`: Production server from build
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Usage
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- The application has its entry point at `src/main.tsx`
+- `App.tsx` returns a `BrowserRouter`:
+  - All the navigation is nested under a `RootLayout`. This is important because we'll implement some React Contexts
+- The code is organised as follows:
+  - There's a path resolution alias `@/` => `.src/` to avoid relative paths in imports. This is setup in `vite.config.js` to inform Vite, and `jsconfig.json` to inform the TS compiler in the editor.
+    - e.g:
+    ```javascript
+    // src/pages/Diary.tsx
+    import { getPosts } from '@/data';
+    // instead of
+    import { getPosts } from '../data';
+    ```
+  - For organisation sake, components are grouped in directories, and imported and re-exported from an `index.ts` file:
+    ```javascript
+    // src/pages/Diary.tsx
+    // This allows us to do this
+    import { PostCard, PostsSkeleton } from '@/components';
+    // instead of this
+    import PostCard from '@/components/PostCard';
+    import PostsSkeleton from '@/components/PostsSkeleton';
+    // Ain't nobody got time for that
+    ```
+  - `pages`: React components that are directly mapped to a route.
+  - `components`: React components used in pages
+  - `layouts`: React components that are used as layouts in routes and render `Outlet`
+  - `data`: Functions that request data to external APIs
+  - `TailwindCSS` and `DaisyUI` are configured for styles <3
