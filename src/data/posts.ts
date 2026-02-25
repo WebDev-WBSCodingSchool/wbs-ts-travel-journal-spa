@@ -45,3 +45,32 @@ export const createPost = async (formData: PostInput): Promise<DbPost> => {
 	const data: DbPost = await res.json();
 	return data;
 };
+export const updatePost = async (
+	id: string,
+	formData: PostInput
+): Promise<DbPost> => {
+	const res = await fetch(`${baseURL}/${id}`, {
+		method: 'PUT',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(formData)
+	});
+	if (!res.ok) {
+		const errorData = await res.json();
+		throw new Error(errorData?.error ?? 'An error occurred updating the post');
+	}
+	const data: DbPost = await res.json();
+	return data;
+};
+export const deletePost = async (id: string): Promise<{ message: string }> => {
+	const res = await fetch(`${baseURL}/${id}`, {
+		method: 'DELETE'
+	});
+	if (!res.ok) {
+		const errorData = await res.json();
+		throw new Error(errorData?.error ?? 'An error occurred deleting the post');
+	}
+	const data: { message: string } = await res.json();
+	return data;
+};
