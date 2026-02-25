@@ -1,4 +1,4 @@
-import Navbar from './UI/Navbar';
-import PostCard from './Posts/PostCard';
-
-export { Navbar, PostCard };
+export { default as Navbar } from './UI/Navbar';
+export { default as PostSkeleton } from './UI/PostSkeleton';
+export { default as PostsSkeleton } from './UI/PostsSkeleton';
+export { default as PostCard } from './Posts/PostCard';

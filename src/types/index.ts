@@ -12,4 +12,4 @@ export type PostInput = {
 	content: string;
 };
 
-export type Post = DbEntry & PostInput;
+export type DbPost = DbEntry & PostInput;
