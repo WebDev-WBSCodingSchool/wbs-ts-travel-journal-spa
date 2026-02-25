@@ -15,7 +15,7 @@ Starter code for authentication/authorization module at WBS Coding School
 ## Commands
 
 - `npm run dev`: Starts development server, pulling environment variables from `.env.development.local` file
-- `npm run build`: Build app with enviroment set to `.env.production.local`
+- `npm run build`: Build app with environment set to `.env.production.local`
 - `npm run preview`: Production server from build
 
 ## Usage
