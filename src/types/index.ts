@@ -1,3 +1,4 @@
+import type { Dispatch, SetStateAction } from 'react';
 export type DbEntry = {
 	_id: string;
 	createdAt: string;
@@ -13,3 +14,5 @@ export type PostInput = {
 };
 
 export type DbPost = DbEntry & PostInput;
+
+export type SetPosts = Dispatch<SetStateAction<DbPost[]>>;
