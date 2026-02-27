@@ -1,4 +1,4 @@
-import type { Dispatch, SetStateAction } from 'react';
+import type { Dispatch, SetStateAction, RefObject } from 'react';
 export type DbEntry = {
 	_id: string;
 	createdAt: string;
@@ -15,4 +15,6 @@ export type PostInput = {
 
 export type DbPost = DbEntry & PostInput;
 
-export type SetPosts = Dispatch<SetStateAction<DbPost[]>>;
+export type SetPost = Dispatch<SetStateAction<DbPost | null>>;
+
+export type ModalRef = RefObject<HTMLDialogElement | null>;

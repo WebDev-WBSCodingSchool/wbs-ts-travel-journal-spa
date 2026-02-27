@@ -1,24 +1,26 @@
 import { useState } from 'react';
 import { toast } from 'react-toastify';
-import type { SetPosts } from '@/types';
+import type { ModalRef, SetPost } from '@/types';
 import { updatePost } from '@/data';
 
 type EditModalProps = {
+	editModalRef: ModalRef;
 	_id: string;
 	content: string;
 	image: string;
 	title: string;
 	author: string;
-	setPosts: SetPosts;
+	setPost: SetPost;
 };
 
 const EditModal = ({
+	editModalRef,
 	_id,
 	content,
 	image,
 	title,
 	author,
-	setPosts
+	setPost
 }: EditModalProps) => {
 	const [{ newTitle, newAuthor, newImage, newContent }, setForm] = useState({
 		newTitle: title,
@@ -46,20 +48,18 @@ const EditModal = ({
 				image: newImage,
 				content: newContent
 			});
-			setPosts((prev) =>
-				prev.map((post) => (post._id === _id ? updatedPost : post))
-			);
+			setPost(updatedPost);
 		} catch (error) {
 			const message = (error as { message: string }).message;
 			toast.error(message);
 		} finally {
 			setIsConfirmed(false);
 			setLoading(false);
-			document.querySelector<HTMLDialogElement>(`#edit-modal-${_id}`)!.close();
+			editModalRef.current?.close();
 		}
 	};
 	return (
-		<dialog id={`edit-modal-${_id}`} className='modal'>
+		<dialog ref={editModalRef} className='modal'>
 			<div className='modal-box'>
 				<form method='dialog'>
 					{/* if there is a button in form, it will close the modal */}

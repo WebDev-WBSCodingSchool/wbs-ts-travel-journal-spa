@@ -1,31 +1,31 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
-import type { SetPosts } from '@/types';
+
 import { deletePost } from '@/data';
+import type { ModalRef } from '@/types';
 
 type DeleteModalProps = {
+	deleteModalRef: ModalRef;
 	_id: string;
-	setPosts: SetPosts;
 };
 
-const DeleteModal = ({ _id, setPosts }: DeleteModalProps) => {
+const DeleteModal = ({ deleteModalRef, _id }: DeleteModalProps) => {
 	const [value, setValue] = useState('');
 	const [isValid, setIsValid] = useState(false);
+	const navigate = useNavigate();
 
 	const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		try {
-			// console.log('Delete!');
 			await deletePost(_id);
-			setPosts((prev) => prev.filter((post) => post._id !== _id));
 		} catch (error) {
 			const message = (error as { message: string }).message;
 			toast.error(message);
 		} finally {
 			setValue('');
-			document
-				.querySelector<HTMLDialogElement>(`#delete-modal-${_id}`)!
-				.close();
+			deleteModalRef.current?.close();
+			navigate('/');
 		}
 	};
 
@@ -38,7 +38,7 @@ const DeleteModal = ({ _id, setPosts }: DeleteModalProps) => {
 		}
 	};
 	return (
-		<dialog id={`delete-modal-${_id}`} className='modal'>
+		<dialog ref={deleteModalRef} className='modal'>
 			<div className='modal-box'>
 				<form method='dialog'>
 					{/* if there is a button in form, it will close the modal */}

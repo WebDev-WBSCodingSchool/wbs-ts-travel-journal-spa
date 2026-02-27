@@ -1,10 +1,7 @@
 import type { DbPost, PostInput } from '@/types';
+import { VITE_APP_TRAVEL_JOURNAL_API_URL } from '@/config';
 
-const API_URL: string | undefined = import.meta.env
-	.VITE_APP_TRAVEL_JOURNAL_API_URL;
-if (!API_URL)
-	throw new Error('API URL is required, are you missing a .env file?');
-const baseURL = `${API_URL}/posts`;
+const baseURL = `${VITE_APP_TRAVEL_JOURNAL_API_URL}/posts`;
 
 export const getPosts = async (): Promise<DbPost[]> => {
 	const res = await fetch(baseURL);

@@ -32,8 +32,6 @@ const Home = () => {
 					content={post.content}
 					image={post.image}
 					title={post.title}
-					author={post.author}
-					setPosts={setPosts}
 				/>
 			))}
 		</div>
