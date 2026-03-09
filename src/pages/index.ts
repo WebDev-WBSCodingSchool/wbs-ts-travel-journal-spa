@@ -1,8 +1,6 @@
-import CreatePost from './CreatePost';
-import Home from './Home';
-import Login from './Login';
-import NotFound from './NotFound';
-import Post from './Post';
-import Register from './Register';
-
-export { CreatePost, Home, Login, NotFound, Post, Register };
+export { default as CreatePost } from './CreatePost';
+export { default as Home } from './Home';
+export { default as Login } from './Login';
+export { default as NotFound } from './NotFound';
+export { default as Post } from './Post';
+export { default as Register } from './Register';

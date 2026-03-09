@@ -1,6 +1,7 @@
-import Navbar from './UI/Navbar';
-import PostCard from './Posts/PostCard';
-import PostSkeleton from './UI/PostSkeleton';
-import PostsSkeleton from './UI/PostsSkeleton';
+export { default as Navbar } from './UI/Navbar';
+export { default as PostSkeleton } from './UI/PostSkeleton';
+export { default as PostsSkeleton } from './UI/PostsSkeleton';
 
-export { Navbar, PostCard, PostSkeleton, PostsSkeleton };
+export { default as PostCard } from './Posts/PostCard';
+export { default as EditModal } from './Posts/EditModal';
+export { default as DeleteModal } from './Posts/DeleteModal';
