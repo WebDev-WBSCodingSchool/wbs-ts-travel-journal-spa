@@ -4,6 +4,8 @@ Starter code for authentication/authorization module at WBS Coding School
 
 ## Setup
 
+Make sure to have the [Travel Journal API](https://github.com/WebDev-WBSCodingSchool/wbs-ts-travel-journal-api) setup and running before you start.
+
 - Fork repo
 - Clone into your computer
 - `cd` into working directory
@@ -15,7 +17,7 @@ Starter code for authentication/authorization module at WBS Coding School
 ## Commands
 
 - `npm run dev`: Starts development server, pulling environment variables from `.env.development.local` file
-- `npm run build`: Build app with enviroment set to `.env.production.local`
+- `npm run build`: Build app with environment set to `.env.production.local`
 - `npm run preview`: Production server from build
 
 ## Usage
@@ -47,3 +49,10 @@ Starter code for authentication/authorization module at WBS Coding School
   - `layouts`: React components that are used as layouts in routes and render `Outlet`
   - `data`: Functions that request data to external APIs
   - `TailwindCSS` and `DaisyUI` are configured for styles <3
+
+## Setup checklist
+
+- Run the development server
+- Read through each of the files to get an overview of the app
+- Visit each of the pages in the browser
+- Use the UI to create, update, and delete a post
